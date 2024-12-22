@@ -34,6 +34,17 @@ vector_t _getConstantVector(uint8_t permutation) {
   }
 }
 
+void _reshufflePermutationArray(void) {
+  srand(time(NULL));
+  for (uint8_t i = NUM_PERMUTATIONS - 1; i > 0; i--) {
+    const uint8_t j = (uint8_t) rand();
+    uint8_t temp = _permutations[i];
+    _permutations[i] = _permutations[j];
+    _permutations[j] = temp;
+  }
+}
+
+
 float noise2D(float x, float y) {
   const uint8_t X = (uint8_t)x;
   const uint8_t Y = (uint8_t)y;

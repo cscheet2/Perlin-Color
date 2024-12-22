@@ -14,11 +14,13 @@
 #ifndef NOISE_H
 #define NOISE_H
 
+#include <stdlib.h>
 #include <stdint.h>
+#include <time.h>
 #include <math.h>
 
 /**
- * Struct to represent a 2D vector
+ * Struct to represent a 2D vector.
  */
 typedef struct vector_t {
   float x;
@@ -26,7 +28,7 @@ typedef struct vector_t {
 } vector_t;
 
 /**
- * Apply the fade function `f(t)=6t^5-15t^t-10t^3` to the input `t`
+ * Apply the fade function `f(t)=6t^5-15t^t-10t^3` to the input `t`.
  * 
  * @param t (float) fade input
  * @return (float) fade function output
@@ -34,7 +36,7 @@ typedef struct vector_t {
 float _fade(float t);
 
 /**
- * Apply the dot product to the following two vectors
+ * Apply the dot product to the following two vectors.
  * 
  * @param v1 (vector_t) vector 1
  * @param v2 (vector_t) vector 2
@@ -43,7 +45,7 @@ float _fade(float t);
 float _dot(vector_t v1, vector_t v2);
 
 /**
- * Apply linear interpolation to the inputs
+ * Apply linear interpolation to the inputs.
  * 
  * @param t (float) line
  * @param p1 (float) point 1
@@ -62,7 +64,12 @@ float _lerp(float t, float p1, float p2);
 vector_t _getConstantVector(uint8_t permutation);
 
 /**
- * Return the 2D noise value of the current coords
+ * Reshuffles the `_permutations` array.
+ */
+void _reshufflePermutationArray(void);
+
+/**
+ * Return the 2D noise value of the current coords.
  * 
  * @param x (float) x-coord * frequency
  * @param y (float) y-coord * frequency
@@ -73,7 +80,7 @@ float noise2D(float x, float y);
 /**
  * Return the fractal browian motion noise value of 
  * the current (x,y) coordinates when given the number
- * of octaves. More detail requrires more octaves
+ * of octaves. More detail requrires more octaves.
  * 
  * @param x (float) x-coord
  * @param y (float) y-coord
@@ -82,9 +89,15 @@ float noise2D(float x, float y);
 float fractalBrownianMotion(float x, float y, uint8_t numOctaves);
 
 /**
- * Ken Perlins original perlin noise permutations
+ * Length of `_permutations` array.
  */
-const uint8_t _permutations[256] = 
+#define NUM_PERMUTATIONS 256
+
+/**
+ * Ken Perlins original perlin noise permutations.
+ * Array with shuffed values from 0-255
+ */
+uint8_t _permutations[NUM_PERMUTATIONS] = 
   { 151, 160, 137,  91,  90,  15, 131,  13, 201,  95,  96,  53, 194, 233,   7, 225,
     140,  36, 103,  30,  69, 142,   8,  99,  37, 240,  21,  10,  23, 190,   6, 148,
     247, 120, 234,  75,   0,  26, 197,  62,  94, 252, 219, 203, 117,  35,  11,  32,
