@@ -8,8 +8,8 @@
  * 
  *******************************************************************/
 
-#include <SDL2/SDL.h>
 #include <stdint.h>
+#include <SDL2/SDL.h>
 
 #include "./screentools.h"
 #include "./noise.h"
@@ -23,6 +23,7 @@ int main(void) {
   SDL_Window* window = initWindow(APP_NAME, APP_WIDTH, APP_HEIGHT);
 	SDL_Renderer* renderer = initRenderer(window);
 	SDL_Surface* surface = initRGBSurface(APP_WIDTH, APP_HEIGHT);
+	SDL_Event event;
 
 	uint32_t* pixels = (uint32_t*)surface->pixels;
 
@@ -32,12 +33,17 @@ int main(void) {
 			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, (int)(val*255), (int)(val*255), (int)(val*255));
 		}
 	}
+	
 	SDL_Texture* texture = initTextureFromSurface(renderer, surface);
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
-  SDL_Delay(5000); // Wait for 2 seconds
+	while (42) {
+		SDL_PollEvent(&event);
+		if (event.type == SDL_QUIT) { break; }
+	}
+
 	SDL_FreeSurface(surface);
   SDL_DestroyWindow(window);
   SDL_Quit();
