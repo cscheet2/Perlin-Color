@@ -1,9 +1,18 @@
+/*******************************************************************
+ * 
+ * @file main.c
+ * 
+ * @author Raegan (Cameron) Scheet
+ * 
+ * @brief Starting point for Perlin Color
+ * 
+ *******************************************************************/
+
 #include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <stdint.h>
 
 #include "./screentools.h"
+#include "./noise.h"
 
 #define APP_NAME   "Perlin Color"
 #define APP_WIDTH  640
@@ -15,12 +24,12 @@ int main(void) {
 	SDL_Renderer* renderer = initRenderer(window);
 	SDL_Surface* surface = initRGBSurface(APP_WIDTH, APP_HEIGHT);
 
-	Uint32* pixels = (Uint32*)surface->pixels;
-	srand(time(NULL));
+	uint32_t* pixels = (uint32_t*)surface->pixels;
 
-	for (int y = 0; y < surface->h; y++) {
-		for (int x = 0; x < surface->w; x++) {
-			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, rand()%256, rand()%256, rand()%256);
+	for (uint16_t y = 0; y < surface->h; y++) {
+		for (uint16_t x = 0; x < surface->w; x++) {
+			float val = fractalBrownianMotion((float)x, (float)y, 5U);
+			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, (int)(val*255), (int)(val*255), (int)(val*255));
 		}
 	}
 	SDL_Texture* texture = initTextureFromSurface(renderer, surface);

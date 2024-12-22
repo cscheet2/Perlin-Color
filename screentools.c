@@ -10,7 +10,7 @@
 
 #include "./screentools.h"
 
-void initSDL(void){
+void initSDL(void) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     fprintf(stderr ,"SDL_Init Error: %s\n", SDL_GetError());
     exit(1);
