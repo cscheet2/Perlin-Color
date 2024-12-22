@@ -3,30 +3,17 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define WIDTH  640
-#define HEIGHT 480
+#include "./screentools.h"
 
-int main() {
-  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    printf("SDL_Init Error: %s\n", SDL_GetError());
-    return 1;
-  }
-  SDL_Window* window = SDL_CreateWindow("Perlin Color", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-  if (window == NULL) {
-    printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
-    return 1;
-  }
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (renderer == NULL) {
-  	printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
-  	return 1;
-	}
-	// SDL_Surface *surface = SDL_GetWindowSurface(window);
-	SDL_Surface *surface = SDL_CreateRGBSurface(0, HEIGHT, WIDTH, 32, 0, 0, 0, 0);
-	if (surface == NULL) {
-    printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
-    return 1;
-  }
+#define APP_NAME   "Perlin Color"
+#define APP_WIDTH  640
+#define APP_HEIGHT 480
+
+int main(void) {
+	initSDL();
+  SDL_Window* window = initWindow(APP_NAME, APP_WIDTH, APP_HEIGHT);
+	SDL_Renderer* renderer = initRenderer(window);
+	SDL_Surface* surface = initRGBSurface(APP_WIDTH, APP_HEIGHT);
 
 	Uint32* pixels = (Uint32*)surface->pixels;
 	srand(time(NULL));
@@ -36,14 +23,10 @@ int main() {
 			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, rand()%256, rand()%256, rand()%256);
 		}
 	}
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (texture == NULL) {
-    printf("SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
-	}
+	SDL_Texture* texture = initTextureFromSurface(renderer, surface);
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
-
 
   SDL_Delay(5000); // Wait for 2 seconds
 	SDL_FreeSurface(surface);
