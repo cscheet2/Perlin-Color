@@ -53,3 +53,19 @@ SDL_Texture* initTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface
   return texture;
 }
 
+void renderTexture(SDL_Renderer* renderer, SDL_Texture* texture) {
+  if (SDL_RenderClear(renderer)) {
+    fprintf(stderr ,"SDL_RenderClear Error: %s\n", SDL_GetError());
+    exit(1);
+  } else 
+  if (SDL_RenderCopy(renderer, texture, NULL, NULL)) {
+    fprintf(stderr ,"SDL_RenderClear Error: %s\n", SDL_GetError());
+    exit(1);
+  } else {
+	  SDL_RenderPresent(renderer);
+  }
+}
+
+void renderSurface(SDL_Renderer* renderer, SDL_Surface* surface) {
+  renderTexture(renderer, initTextureFromSurface(renderer, surface));
+}

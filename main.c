@@ -35,10 +35,7 @@ int main(void) {
 		}
 	}
 	
-	SDL_Texture* texture = initTextureFromSurface(renderer, surface);
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-	SDL_RenderPresent(renderer);
+	renderSurface(renderer, surface);
 
 	while (42) {
 		SDL_PollEvent(&event);
