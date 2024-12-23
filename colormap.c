@@ -4,8 +4,8 @@
  * 
  * @author Raegan (Cameron) Scheet
  * 
- * @brief Implementation of functions defined in `./colormap.h`
- * 
+ *  * @brief Implementation of functions defined in `./colormap.h`
+
  *******************************************************************/
 
 #include "./colormap.h"
@@ -16,7 +16,7 @@ void colorSurface(SDL_Surface* surface, uint8_t numOctaves, uint16_t width, uint
 		for (uint16_t x = 0; x < surface->w; x++) {
 			float val = fractalBrownianMotion((float)x, (float)y, numOctaves);
       pixels[y * surface->w + x] = (val > 0) ?
-			SDL_MapRGB(surface->format, (uint8_t)(val*255), 0, 0):
+			SDL_MapRGB(surface->format, 0, (uint8_t)(val*255), 0):
       SDL_MapRGB(surface->format, 0, 0, (uint8_t)(val*255));
 		}
 	}

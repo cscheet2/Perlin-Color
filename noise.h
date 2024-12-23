@@ -95,10 +95,11 @@ float fractalBrownianMotion(float x, float y, uint8_t numOctaves);
 
 /**
  * Ken Perlins original perlin noise permutations.
- * Array with shuffed values from 0-255
+ * Array with shuffed values from 0-255.
  */
 uint8_t _permutations[NUM_PERMUTATIONS] = 
-  { 151, 160, 137,  91,  90,  15, 131,  13, 201,  95,  96,  53, 194, 233,   7, 225,
+  { 
+    151, 160, 137,  91,  90,  15, 131,  13, 201,  95,  96,  53, 194, 233,   7, 225,
     140,  36, 103,  30,  69, 142,   8,  99,  37, 240,  21,  10,  23, 190,   6, 148,
     247, 120, 234,  75,   0,  26, 197,  62,  94, 252, 219, 203, 117,  35,  11,  32,
      57, 177,  33,  88, 237, 149,  56,  87, 174,  20, 125, 136, 171, 168,  68, 175,
