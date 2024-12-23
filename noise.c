@@ -44,7 +44,11 @@ void _reshufflePermutationArray(void) {
   }
 }
 
+
 float noise2D(float x, float y) {
+
+  _reshufflePermutationArray();
+  
   const uint8_t X = (uint8_t)x;
   const uint8_t Y = (uint8_t)y;
   

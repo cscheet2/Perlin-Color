@@ -13,6 +13,7 @@
 
 #include "./screentools.h"
 #include "./noise.h"
+#include "./colormap.h"
 
 #define APP_NAME   "Perlin Color"
 #define APP_WIDTH  640
@@ -26,18 +27,10 @@ int main(void) {
 	SDL_Surface*  surface  = initRGBSurface(APP_WIDTH, APP_HEIGHT);
 	SDL_Event     event;
 
-	uint32_t* pixels = (uint32_t*)surface->pixels;
-
-	for (uint16_t y = 0; y < surface->h; y++) {
-		for (uint16_t x = 0; x < surface->w; x++) {
-			float val = fractalBrownianMotion((float)x, (float)y, 2U);
-			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, (int)(val*255), (int)(val*255), (int)(val*255));
-		}
-	}
-	
+	colorSurface(surface, 2U, APP_WIDTH, APP_HEIGHT);
 	renderSurface(renderer, surface);
 
-	while (42) {
+	while (":3") {
 		SDL_PollEvent(&event);
 		if (event.type == SDL_QUIT) { break; }
 	}
