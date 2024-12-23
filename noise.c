@@ -38,22 +38,21 @@ void _reshufflePermutationArray(void) {
   srand(time(NULL));
   for (uint8_t i = NUM_PERMUTATIONS - 1; i > 0; i--) {
     const uint8_t j = (uint8_t) rand();
-    uint8_t temp = _permutations[i];
+    const uint8_t temp = _permutations[i];
     _permutations[i] = _permutations[j];
     _permutations[j] = temp;
   }
 }
 
-
 float noise2D(float x, float y) {
 
-  _reshufflePermutationArray();
+  // _reshufflePermutationArray();
   
   const uint8_t X = (uint8_t)x;
   const uint8_t Y = (uint8_t)y;
   
-  const float xf = x-floorf(x);
-  const float yf = y-floorf(y);
+  const float xf = x - floorf(x);
+  const float yf = y - floorf(y);
 
   const vector_t top_right = { xf - 1.0F, yf - 1.0F };
   const vector_t top_left  = { xf       , yf - 1.0F };
