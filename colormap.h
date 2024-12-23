@@ -16,6 +16,7 @@
 #include <SDL2/SDL.h>
 
 #include "./noise.h"
+#include "./load_palettes.h"
 
 /**
  * Given a surface, color that surface with random RGB Values
