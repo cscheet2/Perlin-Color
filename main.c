@@ -20,7 +20,7 @@
 #define APP_HEIGHT 480
 
 int main(void) {
-	_reshufflePermutationArray();  // can't compile without ??
+	reshufflePermutationArray();
 	initSDL();
   SDL_Window*   window   = initWindow(APP_NAME, APP_WIDTH, APP_HEIGHT);
 	SDL_Renderer* renderer = initRenderer(window);

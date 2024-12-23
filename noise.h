@@ -66,7 +66,7 @@ vector_t _getConstantVector(uint8_t permutation);
 /**
  * Reshuffles the `_permutations` array.
  */
-void _reshufflePermutationArray(void);
+void reshufflePermutationArray(void);
 
 /**
  * Return the 2D noise value of the current coords.

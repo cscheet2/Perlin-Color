@@ -34,7 +34,7 @@ vector_t _getConstantVector(uint8_t permutation) {
   }
 }
 
-void _reshufflePermutationArray(void) {
+void reshufflePermutationArray(void) {
   srand(time(NULL));
   for (uint8_t i = NUM_PERMUTATIONS - 1; i > 0; i--) {
     const uint8_t j = (uint8_t) rand();

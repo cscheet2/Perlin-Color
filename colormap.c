@@ -4,8 +4,8 @@
  * 
  * @author Raegan (Cameron) Scheet
  * 
- *  * @brief Implementation of functions defined in `./colormap.h`
-
+ * @brief Implementation of functions defined in `./colormap.h`
+ * 
  *******************************************************************/
 
 #include "./colormap.h"
