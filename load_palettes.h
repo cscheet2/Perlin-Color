@@ -24,13 +24,10 @@
 /**
  * Path from build directory
  */
-#define COLOR_JSON_PATH "./../color_palettes.json"
+#define COLOR_JSON_PATH "./../color_palettes.txt"
 
-#define NUM_NUMERIAL_VALUES 10
-const char* NUMERICAL_COLOR_VALUES[NUM_NUMERIAL_VALUES] = 
-{ 
-  "50", "100", "200", "300", "400", "500", "600", "700", "800", "900" 
-};
+#define MAX_PALETTE_NAME_LEN 50
+
 
 /**
  * Represent a color's RGB values.
@@ -51,34 +48,30 @@ typedef struct palette_t {
 } palette_t;
 
 /**
- * Allocate memory and initialize a color_t.
+ * Allocate memory and initialize a palette_t.
+ * Colors are initalized to NULL, add a color
+ * with the `append_palette_color` function.
+ * Return NULL if name is NULL.
  * 
+ * @param palette_name (const char*)
+ * @return (palette_t*)
+ */
+palette_t* create_palette(const char* palette_name);
+
+/**
+ * Append a color to the palette colors array,
+ * throw error if unable to add color
+ * 
+ * @param palette (palette*)
  * @param red (uint8_t)
  * @param green (uint8_t)
  * @param blue (uint8_t)
- * @return (color_t*)
  */
-color_t* init_color(uint8_t red, uint8_t green, uint8_t blue);
+void append_palette_color(palette_t* palette, uint8_t red, uint8_t green, uint8_t blue);
 
 /**
- * Free a color_t.
- * 
- * @param color (color_t)
- */
-void free_color(color_t* color);
-
-/**
- * Allocate memory and initialize a palette_t.
- * Return NULL if name and colors are NULL.
- * 
- * @param name (const char*)
- * @param colors (color_t*) list of colors
- * @param num_colors (uint8_t) length of colors list
- */
-palette_t* init_palette(const char* name, color_t* colors, uint8_t num_colors);
-
-/**
- * Free a palette.
+ * Free a palette and the shallow copy
+ * array of the collors array
  * 
  * @param palette (palette_t*)
  */
@@ -100,21 +93,13 @@ void _throw_error(const char* error_message);
 void _remove_endl(char* string);
 
 /**
- * Get the RGB value in the string.
- * 
- * @param string (char*)
- * @returns (uint8_t) RGB Value
- */
-uint8_t _get_RGB_value(const char* string);
-
-/**
  * Loads inputted color form the `color_palette` JSON.
  * The resulting array will be in ascending order of 
  * numeric values. User must free colors.
  * Throw error if color cannot be parsed.
  * 
  * @param color (const char*)
- * @returns (color_t*) color array
+ * @returns (palette_t*)
  */
 palette_t* load_color_palette(const char* color_name);
 

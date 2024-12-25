@@ -10,6 +10,8 @@ add_library(screentools SHARED screentools.c)
 add_library(colormap SHARED colormap.c)
 add_library(load_palettes SHARED load_palettes.c)
 
+target_compile_options(${PROJECT_NAME} PRIVATE -g)
+
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} noise)
 target_link_libraries(${PROJECT_NAME} screentools)
