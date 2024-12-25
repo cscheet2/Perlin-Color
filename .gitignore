@@ -1,5 +1,6 @@
 .vscode
 *.so
+*.a
 CMakeFiles
 CMakeCache.txt
 cmake_install.cmake

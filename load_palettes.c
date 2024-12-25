@@ -24,8 +24,9 @@ palette_t* create_palette(const char* palette_name) {
 
 void append_palette_color(palette_t* palette, uint8_t red, uint8_t green, uint8_t blue) {
   if (palette == NULL) { return; }
-  color_t* new_color_ptr = (color_t*) realloc(palette->colors, sizeof(color_t) * 1);
+  color_t* new_color_ptr = (color_t*) realloc(palette->colors, sizeof(color_t) * (palette->num_colors + 1));
   if (new_color_ptr == NULL) { _throw_error("Failed to append color ERROR"); }
+  palette->colors = new_color_ptr;
   palette->colors[palette->num_colors] = (color_t) { red, green, blue };
   palette->num_colors++;
 }
@@ -61,15 +62,17 @@ palette_t* load_color_palette(const char* color_name) {
   }
   if (!found) { _throw_error("Failed to find color in palette ERROR"); }
 
+  line = fgets(buffer, BUFFER_SIZE, json);  // move cursor to first rgb value
+
   palette_t* palette = create_palette(color_name);
-  while(line != NULL && buffer[0] != '\n') {
-    printf(":3");
+  while(line != NULL) {
+    if (buffer[0] == '\n' || buffer[0] == '\0') { break; }
     const uint8_t r = (uint8_t)atoi(strtok(buffer, " "));
     const uint8_t g = (uint8_t)atoi(strtok(NULL,   " "));
     const uint8_t b = (uint8_t)atoi(strtok(NULL,   " "));
     append_palette_color(palette, r, g, b);
+    line = fgets(buffer, BUFFER_SIZE, json); 
   }
-
   fclose(json);
 
   return palette;

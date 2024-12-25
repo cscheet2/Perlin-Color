@@ -16,7 +16,7 @@ void colorSurface(SDL_Surface* surface, uint8_t numOctaves, uint16_t width, uint
   for (uint16_t y = 0; y < surface->h; y++) {
 		for (uint16_t x = 0; x < surface->w; x++) {
 			uint8_t index = fractalBrownianMotion((float)x, (float)y, numOctaves) * (palette->num_colors);
-			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, palette->colors->r, palette->colors->g, palette->colors->b);
+			pixels[y * surface->w + x] = SDL_MapRGB(surface->format, palette->colors[index].r, palette->colors[index].g, palette->colors[index].b);
 		}
 	}
   free_palette(palette);

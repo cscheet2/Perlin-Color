@@ -11,6 +11,10 @@ add_library(colormap SHARED colormap.c)
 add_library(load_palettes SHARED load_palettes.c)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -g)
+target_compile_options(noise PRIVATE -g)
+target_compile_options(screentools PRIVATE -g)
+target_compile_options(colormap PRIVATE -g)
+target_compile_options(load_palettes PRIVATE -g)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} noise)
