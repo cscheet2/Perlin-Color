@@ -16,7 +16,8 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 
-#include "./noise.h"
+// #include "./noise.h"
+#include "./sdnoise1234.h"
 #include "./load_palettes.h"
 
 /**
