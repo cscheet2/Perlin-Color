@@ -19,7 +19,7 @@ void colorSurface(const char* color_name, SDL_Surface* surface, uint8_t numOctav
   for (uint16_t y = 0; y < surface->h; y++) {
 		for (uint16_t x = 0; x < surface->w; x++) {
 			float noise = ((fractalBrownianMotion2D((float)x * scale, (float)y * scale, numOctaves)) + 1.0F) / 2.0F;
-			uint8_t index = (uint8_t)roundf(noise * (palette->num_colors - 1));
+			uint8_t index = (uint8_t)(noise * (palette->num_colors));
 			pixels[y * surface->w + x] = SDL_MapRGBA(surface->format, palette->colors[index].r, palette->colors[index].g, palette->colors[index].b, 255);	     
 			     if (index == 0) { l0++; }
 			else if (index == 1) { l1++; }

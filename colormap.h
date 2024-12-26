@@ -13,7 +13,6 @@
 #define COLORMAP_H
 
 #include <stdint.h>
-#include <math.h>
 #include <SDL2/SDL.h>
 
 // #include "./noise.h"
